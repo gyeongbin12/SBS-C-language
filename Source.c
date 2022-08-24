@@ -2,103 +2,112 @@
 
 void main()
 {
-	// 포인터 연산
+	// 문자열이란?
 	/*
-	int array[5] = { 10,15,20,25,30 };
+	// 연속적인 메모리 공간에 저장된 문자 변수의 집합입니다.
 
-	printf("배열의 주소 : %p\n", array);
+	// char는 1 byte이므로 하나의 문자만 저장할 수 있습니다.
+	char alphabet = 'A';
 
-	// pointer 변수는 array의 시작 주소를 가리킵니다.
-	// &array[0] == array랑 같기 때문에 pointer 변수에 저장할수있습니다.
-	int * pointer = array; 
+	               //  0   1   2   3   4
+	char string[6] = {'A','B','C','D','E'};
 
-	printf("포인터 변수의 값 : %p\n", pointer);
-	printf("포인터 변수가 가리키는 값 : %d\n", *pointer);
+	string[0] = 'T';
 
-	// pointer 변수가 가리키는 자료형의 크기만큼 증가합니다.
-	pointer = pointer + 1;
-	printf("포인터 변수의 값 : %p\n", pointer);
-	printf("포인터 변수가 가리키는 값 : %d\n", *pointer);
+	// 문자 배열을 선언할 때 맨 마지막에 NULL만 포함됩니다.
+	// 문자 배열같은 경우에는 배열의 크기 n + 1로 설정해야 합니다.
+	printf("string 배열의 값 : %s\n", string);
 
-	// 문제
-	// 배열의 네 번째 요소의 값을 포인터로 접근해서 변경해주세요.
+	// NULL문자는 문자열의 끝을 알려주는 제어 문자입니다.
 
-	pointer = pointer + 2;
-	*pointer = 100;
-	printf("포인터 변수의 값 : %p\n", pointer);
-	printf("포인터 변수가 가리키는 값 : %d\n", *pointer);
+	// [T] [B] [\0] [D] [E]
+	string[3] = '\0';
+
+	// 문자 배열 중간에 NULL문자가 있으면 NULL문자 이전의 문자열까지만 출력합니다.
+	printf("string 배열의 값 : %s\n", string);
 	*/
 
-	// 최댓값과 최솟값 구하기
+	// 문자열 초기화
 	/*
-	// data라는 배열 안에서 최댓값 : 66
-	// data라는 배열 안에서 최솟값 : 1
+	// 코드 영역
+	// 데이터 영역 -> BSS, Read Only Data Segment,
+	// 스택
+	// 힙
 
-	int max = 0;
-	int min = 100001;
+	// "count"
+	// [c][o][u][n][t][/0] -> 5 char + null = 6 byte
 
-	int data[5] = { 10,5,66,1,6 };
+	// 4 byte 변수의 메모리를 저장할 수 있는 포인터 변수
+	// char * ptr -> [c][o][u][n][t][\0]
+	const char * ptr = "count";
 
-	for (int i = 0; i < 5; i++)
-	{
-		printf("data 배열의 값 : %d\n", data[i]);	
-
-		if (max < data[i])
-		{
-			max = data[i];
-		}
-	}
-		if (min > data[i])
-		{
-			min = data[i];
-		}
-	}
-	printf("배열에 있는 원소의 최솟값 : %d", min);
-	printf("배열에 있는 원소의 최댓값 : %d", max);
-	*/
-
-	// 상수 지시 포인터
-	/*
-	// 상수를 가리키는 포인터이며, 포인터 자체는 상수가 아닙니다.
-
-	int value = 100;
-	const int * ptr = &value;
-	int x = 300;
-
-	// 포인터 변수가 가리키는 값을 변경할 수 없습니다.
-	// *ptr = 100;
-
-	// 상수 지시 포인터 해당 변수를 가리키는 변수를 상수화하지 않습니다.
-	value = 200;
-
-	// 포인터 가리키는 값은 출력할 수 있습니다.
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
-
-	// 상수 지시 포인터의 경우 다른 변수의 주소는 저장할 수 있습니다.
-	ptr = &x;
-
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
-	*/
-
-	// 2차원 배열
-	// 배열의 요소로 또 다른 배열을 가지는 배열입니다.
+	// 포인터가 변수가 어디를 가리키고 있는지 확인하기 위해서
+	// 거기 있는 값을 출력하기 위해서 %c로 출력합니다.	
 	 
-	// 앞에 있는 배열이 열의 길이, 뒤에 있는 배열이 행의 길이 
-	// 3열 2행
-	int team[3][2] =
-	{
-		{0 , 5}, // [0][0] = 0 , [0][1] = 5
-		{10, 4}, // [1][0] = 10, [1][1] = 4
-		{9 , 1}  // [2][0] = 9 , [2][1] = 4
-	};
+	//ptr[0] = "T";
+	// *ptr을 하는 순간 포인터가 가리키고 있는 위치에 접근해서 값을 출력합니다
 
-	// 2 중 for을 이용해서 2차원 배열의 값을 전부 출력해주세요.
-	for (int i = 0; i < 3; i++)
+	// ptr = count
+	// "%s" 문자열의 시작 주소로 접근해서 값을 count 출력한다고 보시면 됩니다.
+	printf("ptr이 가리키는 주소 : %p\n", ptr);
+	printf("ptr이 가리키는 값 : %c\n", ptr[0]);
+	printf("ptr이 가리키는 문자열의 값 : %c\n", *ptr);
+	printf("ptr이 가리키는 문자열의 값 : %s\n", ptr);
+	*/
+
+	// 이중 포인터
+	/*
+	// [4 byte]
+	int value = 100;
+
+	// ptr(value 주소) -> value 주소를 가리킵니다.
+	int * ptr = &value;
+
+	// twoPtr(이중 포인터)은 ptr이라는 포인터 변수의 주소를 저장합니다.
+	// twoPtr(ptr의 주소) -> ptr의 시작 주소를 가리킵니다.
+	int ** twoPtr = &ptr;
+
+	printf("value의 시작 주소 : %p\n", &value);
+	printf("ptr이 가리키는 값 : %p\n", ptr);
+	printf("twoPtr이 가리키는 값 : %p\n", twoPtr);
+
+	printf("ptr 변수가 가리키고 있는 변수의 값 : %d\n", *ptr);
+	printf("twoPtr 변수가 가리키고 있는 변수의 값 : %d\n", **twoPtr);
+
+	// twoPtr(00AAEE66)  ptr(00FF883A)       value
+	// [00FF883A ]---->  [00DDFC55] ---->  [00DDFC55]
+	*/
+
+	// 소수 판별하기
+	/*
+	// 소수(1보다 큰 자연수 중에 1과 자기자신만을 약수로 가지는 수)
+
+	// 내가 입력한 숫자가 소수인지 아닌지 판별하는 프로그램
+	// 5 -> 소수입니다.
+	// 6 -> 소수가 아닙니다.
+
+	int count = 0;
+	int value;
+	
+	scanf_s("%d", &value);
+
+	for (int i = 0; i <= value-1; i++)
 	{
-		for (int j = 0; j < 2; j++)
+		if (value % i == 0);
 		{
-			printf("%d번 째 열의 %d 번 째 행의 값 : %d\n", i, j, team[i][j]);
+			count++;
 		}
 	}
+
+	if (count == 0)
+	{
+		printf("소수");
+	}
+	else
+	{
+		printf("소수가 아닙니다");
+	}
+	*/
 }
+
 
