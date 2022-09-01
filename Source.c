@@ -1,70 +1,92 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-void Function()
-{
-	printf("Hello");
-}
 
 void main()
 {
-	// 이중 포인터 응용
+	// 포인터 배열이란?
 	/*
-	int a = 10;
-	int b = 20;
+	// 배열의 요소로 포인터 변수를 가지는 배열입니다.
+	int num1 = 10, num2 = 20, num3 = 30;
 
-	int * ptr1 = &a;
-	int * ptr2 = &b;
+	int * array[3] = { &num1, &num2, &num3 };
 
-	int ** pptr1 = &ptr1;
-	int ** pptr2 = &ptr2;
+	for (int i = 0; i < 3; i++)
+	{
+		printf("array 포인터의 값 : %p\n", array[i]);
+		printf("array 포인터가 가리키는 값 : %d\n", *array[i]);
+	}
 
-	int temp = *pptr1;
-	*pptr1 = *pptr2;
-	*pptr2 = temp;
+	const char * data[3] = { "Apple", "Banana", "Melon" };
 
-	printf("a의 값 : %d, b의 값: %d\n", a, b);
+	// 새로운 경빈이라는 문자열의 시작 주소를 다시 가리킵니다.
+	// 그리고 이전에 참조되어 있던 Apple의 참조는 끊깁니다.
+	data[0] = "Gyeongbin";
 
-	printf("ptr1이 가리키는 값 : %d, ptr2가 가리키는 값 : %d\n", *ptr1, *ptr2);
+	// *data[0] = 'A';
+
+	for (int i = 0; i < 3; i++)
+	{
+		// %s : '\0'문자를 만나는 순간까지 계속 출력하는 서식 지정자입니다
+		printf("%s\n", data[i]);
+	}
 	*/
 
-	// 댕글링 포인터
+	// ASCII 코드
 	/*
-	// 이미 해제된 메모리를 가리키고 있는 포인터입니다.
-	int * ptr = (int *)malloc(4);
-
-	*ptr = 10;
-
-	printf("ptr이 가리키는 주소 : %p\n", ptr);
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
-
-	free(ptr);
-
-	// 동적 할당한 메모리를 해제할 떄 포인터 변수를 NULL로 초기화합니다.
-	ptr = NULL;
-
-	// 해제한 메모리를 다시 할당하면 처음 생성한 위치에서 메모리가 생성됩니다.
-	ptr = (int*)malloc(4);
-
-	*ptr = 20;
-	printf("ptr이 가리키는 주소 : %p\n", ptr);
-	pritnf("ptr이 가리키는 값 : %d\n", *ptr);
+	// 미국 표준화 협회가 제정한 정보 교환용 표준 코드로 영문 알파벳을 사용하는
+	// 대표적인 문자 인코딩입니다.
+	if ('A' < 'C')
+	{
+		for (int i = 0; i < 26; i++)
+		{
+			char alphabet = 'A' + i;
+			printf("%c\n", alphabet);
+		}
+	}
 	*/
 
-	// 함수 포인터
-	// 함수의 주소값을 저장하고 가리킬 수 있는 변수입니다.
+	// 공약수
+	/*
+	// (int) 두 개의 변수를 입력 받습니다.
+	// A 변수와 B 변수의 공통된 약수를 출력해주세요.
+	int A, B;
 
-	// printf("Function함수의 주소 : %p\n", Function);
-	// printf("Function함수의 주소 : %p\n", &Function);
+	scanf_s("%d%d", &A, &B);
 
-	void(* fp)();
+	for(int i = 1; i <= A && i <= B; i++)
+	{
+		if( A % i == 0 && B % i == 0)
+		{
+			printf("%d\n", i);
+		}
+	}
+	*/
 
-	// 함수 포인터는 함수의 변환형과 매개변수의 타입이 일치해야 하며,
-	// 함수 포인터를 사용하여 동적으로 메모리를 할당할 수 없습니다.
-	fp = Function;
-	
-	fp(5);
+	// 자기가 스스로 생각하고 프로그램을 만드 실력이 많이 향상됩니다.
+	// 혼자서 프로그램을 만드는 거보다 팀을 만들어서 간단한 프로젝트를 추천합니다.
 
+	// 완전수
+	// 자기 자신을 제외한 양의 약수(진약수)를 더했을 때
+	// 자기 자신이 되는 양의 정수를 말한다.
 
+	int value;
+	int result = 0;
 
+	scanf_s("%d", &value);
+
+	for (int i = 1; i < value; i++)
+	{
+		if (value % i == 0)
+		{
+			result += i;
+		}
+	}
+
+	if (value == result)
+	{
+		printf("완전수");
+	}
+	else
+	{
+		printf("완전수 X");
+	}
 }
