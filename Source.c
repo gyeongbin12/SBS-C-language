@@ -1,114 +1,88 @@
-#include <stdio.h> // <> 라이브러리 헤더 파일을 가져올 때 사용합니다
-// #include "Function.h" // "" 사용자 정의 헤더 파일을 가져올 때 사용합니다.
+#include <stdio.h>
+#include <math.h> // 수학 관련 헤더 파일
 
-// 매크로란?
-// 프로그램 내에서 특정한 데이터가 문자열로 정의되고 처리되는 과정입니다.
-
-// 매크로는 자료형이 없으므로 메모리 공간이 확보되지 않습니다.
-#define PI 3.14
-
-// 매크로 에서는 ;로 필요하지 않습니다.
-
-// 매크로 함수도 자료형이 없으므로 메모리 공간이 확보되지 않습니다.
-#define Solution(x, y) x * y
-
-int Function(int x, int y)
+struct Player
 {
-	return x + y;
-}
-
-#define ANDROID 1
-#define IOS 0
-	
-// 구조체
-struct Character
-{
-	int health;
-	float weight;	
-	const char * name;
-	// 구조체를 선언하기 전에 구조체는
-	// 메모리 공간이 생성되 않으므로,
-	// 구조체 내부에 있는 데이터를 초기화할 수 없습니다.	
+	int x;
+	int y;
 };
 
-void main()
+struct Monster
 {
-	// 전처리기란?
+	int x;
+	int y;
+};
+
+void ParameterArray(int array[])
+{
+	for (int i = 0; i < 5; i++)
+	{
+		array[i] = 10;
+	}
+}
+
+
+int main()
+{
+	// 두 점 사이의 거리
 	/*
-	// 프로그램이 컴파일되기 이전에 프로그램에 대한 사전 처리하는 과정입니다.
-	int result = Function(10, 20);
-
-	printf("result 변수의 값 : %d\n", result);
-
-	// 매크로 변수는 상수이고, 메모리 공간이 없기 떄문에 값을 변경할 수 없습니다.
-	// PI = 3.45;
-
-	printf("PI의 값 : %f\n", PI);
-	printf("Solution 함수의 결과 : %d\n", Solution(10, 20));
+	struct Player character = {0, 0};
+	struct Monster dragon = {3, 5};
+	// character와 dragon의 거리를 구해주세요.
+	printf
+	(
+		"두 점 사이의 거리 : %lf",
+		sqrt(pow(character.x - dragon.x, 2) + pow(character.y - dragon.y, 2))
+	);
 	*/
 
-	// 조건부 컴파일
+	// Lvalue vs Rvalue
 	/*
-	// 조건에 따라 코드의 일정 부분을 컴파일할지 안 할지 결정할 수 있습니다.
-	// 조건부 컴파일은 #endif를 사용해서 끝내야 됩니다.
-	
-#if IOS
-	// PC에 알맞는 키 입력
-	printf("안드로이드 기기입니다.");
-#elif ANDROID
-	// 모바일에 알맞는 키 입력
-	printf("두 번째 조건입니다.");
-#else
-	printf("2개의 조건이 다 틀립니다.");
-#endif
+	// Lvalue란?
+	// 표현식 이후에도 사라지지 않는 값이며, 이름을 지니고 있는 변수입니다.
+	// Rvalue란?
+	// 표현식 이후에 사라지는 값이며, 임시 변수입니다.
+	// 10,20 <- Rvalue
+	// a, b <- Lvalue
+	// Lvalue는 Rvalue로도 사용할 수 있습니다.
+	int a = 10;
+	int b = 20;
+
+	// a + b : 임시 변수입니다.
+	int result = a + b;
+	// Lvalue에 상수를 사용할 수 없습니다.
+	// 10 = a;
+	// a + b = 10;
+	printf("result의 변수의 값 : %d", result);
+	// 전위 증감, 후위 증감
+	// 전위 증감같은 경우에는 Lvalue랑 Rvalue로 사용할 수 있습니다.
+	// 후위 증감같은 경우에는 Rvalue로만 사용이 가능합니다.
+	int x = 0;
+	int y = 0;
+	// 전위 증가는 증가된 자기 자신(변수)을 반환합니다.
+	++y;
+	// 후위 증가는 증가된 복사본을 반환합니다.
+	x++;
 	*/
 
-	// 구조체란?
-	/*
-	// 여러 개의 변수를 하나의 집합으로 구조화한
-	// 다음 하나의 객체를 생성하는 것입니다.
-	struct Character leesin;
+	// [0] [0] [0] [0] [0]
+	int room[5] = { 0, };
 
-	leesin.health = 100;
-	leesin.name = "Leesin";
-	leesin.weight = 80.5f;
-
-	printf("leesin의 체력 : %d\n", leesin.health);
-	printf("leesin의 이름 : %s\n", leesin.name);
-	printf("leesin의 몸무게 : %f\n", leesin.weight);
-
-	// 구조체에 초기화 리스트를 사용할 때는
-	// 구조체 위에서 선언된 변수의 순서로 정의되어야합니다.
-	struct Character Alistar = {200,100.5,"Alistar"};
-
-	printf("Alistar의 체력 : %d\n", Alistar.health);
-	printf("Alistar의 이름 : %s\n", Alistar.name);
-	printf("Alistar의 몸무게 : %f\n", Alistar.weight);
-	*/
-
-	// 과잉수
-	// 자연수 중에서 자기 자신을 제외한 양의 약수를
-	// 모두 더햇을 떄 자기 자신보다 더 커지는 수이다.
-
-	int value;
-	int result = 0;
-
-	scanf_s("%d\n", &value);
-
-	for (int i = 1; i < value; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		if (value % i == 0)
-		{
-			result += i;
-		}
+		printf("%d  ", room[i]);
 	}
 
-	if(result > value)
+	// room이라는 이름은 배열의 시작 주소를 의미합니다.
+	ParameterArray(room);
+
+	printf("\n");
+
+	for (int i = 0; i < 5; i++)
 	{
-		printf("과잉수");
+		printf("%d  ", room[i]);
 	}
-	else
-	{
-		printf("과잉수 x");
-	}
+
+
+	return 0;
 }
