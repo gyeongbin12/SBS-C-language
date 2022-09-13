@@ -1,114 +1,90 @@
-#include <stdio.h> // <> 라이브러리 헤더 파일을 가져올 때 사용합니다
-// #include "Function.h" // "" 사용자 정의 헤더 파일을 가져올 때 사용합니다.
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
 
-// 매크로란?
-// 프로그램 내에서 특정한 데이터가 문자열로 정의되고 처리되는 과정입니다.
+// 가변 인수란?
+/*
+// 인수의 개수와 타입이 미리 정해져 있지 않은 인수입니다.
 
-// 매크로는 자료형이 없으므로 메모리 공간이 확보되지 않습니다.
-#define PI 3.14
+// 가변 인수를 만들기 위해서 자료형을 선언해주어야 합니다.
 
-// 매크로 에서는 ;로 필요하지 않습니다.
-
-// 매크로 함수도 자료형이 없으므로 메모리 공간이 확보되지 않습니다.
-#define Solution(x, y) x * y
-
-int Function(int x, int y)
+void Function(int x,...)
 {
-	return x + y;
+	va_list pointer; // 가변 인수의 목록 포인터
+
+	__crt_va_start(pointer, x); // 가변 인수 목록 포인터 설정
+
+	// 가변 인수(x)의 갯수만큼 반복하도록 설정합니다.
+	for (int i = 0; i < x; i++)
+	{
+		int value = __crt_va_arg(pointer, int); // int 크기만크변 인수 목록 포인터에서 값을 가져옵니다.
+
+		//pointer는 int 크 순방향으로 이동합니다.
+		printf("%d\n", value);
+	}
+
+	__crt_va_end(pointer); // 가변 인수 목록 포인터를 NULL 초기화합니다.
+}
+*/
+
+// 좌표 정보 X와 Y값을 받는 함수입니다.
+void gotoXY(int x, int y)
+{
+	// x와 y 좌푯값을 설정합니다.
+	COORD position = { x, y }; 
+
+	// 좌표 위치를 이동시켜주는 함수
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
 
-#define ANDROID 1
-#define IOS 0
-	
-// 구조체
-struct Character
-{
-	int health;
-	float weight;	
-	const char * name;
-	// 구조체를 선언하기 전에 구조체는
-	// 메모리 공간이 생성되 않으므로,
-	// 구조체 내부에 있는 데이터를 초기화할 수 없습니다.	
-};
 
 void main()
 {
-	// 전처리기란?
+	// 가변인수
 	/*
-	// 프로그램이 컴파일되기 이전에 프로그램에 대한 사전 처리하는 과정입니다.
-	int result = Function(10, 20);
+	// Function 이라는 함수는 하나의 매개 변수를 가지고 있기 떄문에 하나의 인수만 전달할 수 있습니다.
+	Function(4,20,30,40,50);
 
-	printf("result 변수의 값 : %d\n", result);
+	// x 매개 변수의 시작 주소가 저장됩니다.
+	// 가변 인수는 연속적인 메모리 공간을 가집니다.
 
-	// 매크로 변수는 상수이고, 메모리 공간이 없기 떄문에 값을 변경할 수 없습니다.
-	// PI = 3.45;
-
-	printf("PI의 값 : %f\n", PI);
-	printf("Solution 함수의 결과 : %d\n", Solution(10, 20));
+	// printf( )함수는 인수를 계속 가변적으로 받을 수 있습니다.
+	// printf("%d%d%d%d", 20, 30, 40, 50);
 	*/
 
-	// 조건부 컴파일
-	/*
-	// 조건에 따라 코드의 일정 부분을 컴파일할지 안 할지 결정할 수 있습니다.
-	// 조건부 컴파일은 #endif를 사용해서 끝내야 됩니다.
-	
-#if IOS
-	// PC에 알맞는 키 입력
-	printf("안드로이드 기기입니다.");
-#elif ANDROID
-	// 모바일에 알맞는 키 입력
-	printf("두 번째 조건입니다.");
-#else
-	printf("2개의 조건이 다 틀립니다.");
-#endif
-	*/
+	// 좌표 정보를 설정합니다.
+	int x = 5, y = 5;
 
-	// 구조체란?
-	/*
-	// 여러 개의 변수를 하나의 집합으로 구조화한
-	// 다음 하나의 객체를 생성하는 것입니다.
-	struct Character leesin;
-
-	leesin.health = 100;
-	leesin.name = "Leesin";
-	leesin.weight = 80.5f;
-
-	printf("leesin의 체력 : %d\n", leesin.health);
-	printf("leesin의 이름 : %s\n", leesin.name);
-	printf("leesin의 몸무게 : %f\n", leesin.weight);
-
-	// 구조체에 초기화 리스트를 사용할 때는
-	// 구조체 위에서 선언된 변수의 순서로 정의되어야합니다.
-	struct Character Alistar = {200,100.5,"Alistar"};
-
-	printf("Alistar의 체력 : %d\n", Alistar.health);
-	printf("Alistar의 이름 : %s\n", Alistar.name);
-	printf("Alistar의 몸무게 : %f\n", Alistar.weight);
-	*/
-
-	// 과잉수
-	// 자연수 중에서 자기 자신을 제외한 양의 약수를
-	// 모두 더햇을 떄 자기 자신보다 더 커지는 수이다.
-
-	int value;
-	int result = 0;
-
-	scanf_s("%d\n", &value);
-
-	for (int i = 1; i < value; i++)
+	// 키 입력은 매 프레임마다 입력이 되어야 합니다.
+	while (1)
 	{
-		if (value % i == 0)
+		// 키 입력
+		// 논블로킹
+		// 키 입력을 하지 않아도 다른 작업이 실행될 수 있습니다.
+		 
+		// (VK_DOWN) : 키보드아래키를 눌렀을 때 실행되는 함수
+		if (GetAsyncKeyState(VK_DOWN))
 		{
-			result += i;
+			y++;
+
+			Sleep(100); // 0.1초 동안 대기
+			            // Sleep : 1/1000의 단위로 계산합니다.
 		}
+
+		// 좌표를 (5, 5)를 설정합니다
+		gotoXY(x, y);
+
+		// 좌표 정보를 받아서 출력할 텍스트를 나타냅니다.	
+		printf("ㅇ");
+
+		// system(cls) : 화면 전체를 지우는 함수입니다.
+		system("cls");
+
+		// 동기 vs 비동기
+
+		// 블로킹
+		// 키 입력을 받을 때까지 계속 대기합니다.
 	}
 
-	if(result > value)
-	{
-		printf("과잉수");
-	}
-	else
-	{
-		printf("과잉수 x");
-	}
+	return 0;
 }
