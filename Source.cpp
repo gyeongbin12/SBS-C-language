@@ -1,61 +1,67 @@
 ﻿#include <stdio.h>
 
+void CallByValue(int x)
+{
+	x = 100;
+	printf("함수 내부에 있는 값: %d\n", x);
+}
+
+void CallByReference(int* x)
+{
+	*x = 100;
+}
+
 int main()
 {
-	// 상수에 대한 이해
+
+	// scanf 함수 변수 입력
 	/*
-	const int value = 10;
+	int value = 0;
+	int value2 = 0;
 
-	printf("value 변수의 값 : %d", value);
+	// 정수값을 입력 받으려면 %d라는 서식 지정자를 사용합니다.
+	scanf_s("value:%d,value2:%d", &value, &value2); // call by value로 하게 되면 <- 내부에서만 값이 변화됩니다.
 
-	// value의 값은 const로 상수화되었으므로 바꿀 수 없습니다.
-	// value = 20;
-
-	// 심볼릭 상수 : 메모리 공간을 가지고 있는 상수 ex) const int data;
-	// 리터럴 상수 : 메모리 공간을 가지고 있지 않는 상수 ex) 10, "Count"
+	printf("value의 값 : %d, value2의 값 : %d", value, value2);
 	*/
 
-	// 포인터 상수
+	// scanf 함수 배열 입력
 	/*
-	int variable = 10;
-	int variable2 = 20;
-	
-	// const가 자료형 * 앞에  들어가게 되면 포인터의 메모리 공간을 상수화합니다.
-	int* const pointer = &variable;
+	char name[10];
 
-	pointer = &variable2;
+	// 배열의 크기는 컴팡리 시점에 크기가 정해집니다.
+	// 배열의 크기를 명시적으로 scanf_s()함수에게 알려주어야 합니다.
+	scanf_s("%s", name, sizeof(name));
 
-	printf("pointer 변수가 가리키는 값 : %d\n", *pointer);
-
-	// pointer  : 포인터 변수 자체(메모리 주장한 값이 출력됩니다.)
-	// *pointer : 포인터가 가리키는 메모리 공간의 값을 출력합니다
-
-	*pointer = 30;
-	variable = 50;
+	printf("%s", name);
 	*/
-
-	// 상수 지시 포인터
-	int data = 10;
-	int data2 = 20;
-
-	const int * pointer = &data;
-
-	pointer = &data2;
-
-	// 상수 지시 포인터는 가리키는 포인터 변수를 상수화하는 것이고,
-	// 가리키고 있는 메모리는 상수화를 시키는것이 아닙니다.
-	data2 = 30;
-
-	// *pointer = 1000;
-	
-	// string -> [H][e][l][l][o][\ ]
-	// OS read only Data 영역을 접근할 수 없도록 설정했기 때문입니다.
-	const char * string = "Hello";
-
-	// *string = 'A';
-	string = "LOL";
+	 
+	// 오븐 시계
+	int hour, minute, time;
+	scanf_s("%d %d %d", &hour, &minute, &time);
+	hour += time / 60;
+	minute += time % 60;
+	if (minute >= 60) {
+		hour++;	
+		minute %= 60; 
+	}	
+	if (hour >= 24)	
+		hour %= 24;	
+	printf("%d %d\n", hour, minute);
 
 
+	// 값에 의한 전달과 참조에 의한 전달
+	/*
+	printf("value 변수의 값 : %d\n", value); // call by reference로 하게 되면
+						 // 함수가 종료되더라도 변화된 값이 그대로 적용다.
+	CallByValue(value);
+
+	printf("value 변수의 값 : %d\n", value);
+
+	CallByReference(&value);
+
+	printf("value 변수의 값 : %d\n", value);
+	*/
 
 	return 0;
 }
